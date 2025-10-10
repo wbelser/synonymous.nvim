@@ -1,8 +1,15 @@
 local M = {}
 
 -- simple test command to make sure it runs
-function M.run()
-	vim.notify("synonymous...")
+function M.select_synonym()
+	local word = vim.fn.expand("<cword>")
+
+	if word == nil or word == "" then
+		vim.notify("no word to look up", vim.log.levels.WARN)
+		return
+	end
+
+	vim.notify("word under cursor: " .. word)
 end
 
 -- function M.select_synonym()

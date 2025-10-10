@@ -6,8 +6,8 @@ function M.setup()
 	-- Later we can accept options here
 end
 
-function M.run()
-	core.run()
+function M.select_synonym()
+	core.select_synonym()
 end
 
 -- function M.select_synonym()

@@ -33,10 +33,23 @@ function M.select_synonym()
 	end
 
 	vim.ui.select(choices, { prompt = "Synonyms for '" .. word .. "':" }, function(choice)
-		if choice then
-			vim.notify("You chose: " .. choice)
-			-- Later: replace the word in buffer here
+		if not choice then
+			vim.notify("No synonym selected", vim.log.levels.INFO)
+			return
 		end
+
+		-- Replace the word under cursor
+		local cursor = vim.api.nvim_win_get_cursor(0)
+		local row, col = cursor[1], cursor[2]
+
+		-- Move cursor to the start of the word
+		vim.cmd("normal! viw")
+		vim.cmd("normal! c" .. choice)
+
+		-- Restore cursor near replaced word
+		vim.api.nvim_win_set_cursor(0, { row, col })
+
+		vim.notify(string.format("Replaced '%s' with '%s'", word, choice))
 	end)
 end
 

@@ -1,8 +1,8 @@
-# synonymous.nvim
+# Synonymous.nvim
 
 Just want a simple plugin to give me choices from a thesaurus to replace the boring word I used.
 
-# Lazy.nvim
+# Lazy.nvim setup
 
 Here is what you need as a file in your
 Lazy.nvim plugins folder. You can create the

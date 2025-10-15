@@ -16,7 +16,7 @@ surely change that.
 ```lua
 return {
 	{
-		"wbelser/synonymous.nvim"
+		"wbelser/synonymous.nvim",
         -- optional, load only for writing,
 		ft = { "markdown", "text", "tex", "html" },
 		config = function()

@@ -4,7 +4,7 @@ local health = vim.health or require("health")
 
 local function check_nvim_version()
 	local v = vim.version()
-	if v.major < 12 then
+	if v.major == 0 and v.minor < 12 then
 		health.error("Neovim 0.12+ is required (current: " .. v.major .. "." .. v.minor .. "." .. v.patch .. ")")
 		return false
 	end

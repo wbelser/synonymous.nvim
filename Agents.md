@@ -1,6 +1,10 @@
-# Synonymous.nvim
+# Agents.md
 
-Just want a simple plugin to give me choices from a thesaurus to replace the boring word I used.
+## Overview
+
+synonymous.nvim is a Neovim plugin that provides thesaurus functionality. It fetches synonyms for the word under the cursor using the Datamuse API and allows you to replace the word with a chosen synonym via a selection menu.
+
+The plugin uses `vim.ui.select` to display available synonyms and replaces the word under the cursor with the selected option. It is designed for writing in markdown, plain text, LaTeX, and HTML files.
 
 ## Requirements
 
@@ -64,6 +68,18 @@ require("synonymous").setup()
 | `:Synonymous` | Fetch and replace synonym for word under cursor |
 | `:SynonymousHealthCheck` | Run health checks (internet, curl, Datamuse API) |
 
+## Keymaps
+
+| Keymap | Mode | Description |
+|--------|------|-------------|
+| `<leader>sy` | Normal | Find and replace with synonym |
+| `<leader>sy` | Visual | Find and replace with synonym |
+
 ## Usage
 
-So - put your cursor on a word (because you were most likely going through a document with `w` or `b` as you were rereading) and then run the command `:Synonymous` or use the keymap `<leader>sy` to launch the word picker. Use arrow keys or start typing and then hit `Enter` to select your new word.
+1. Place your cursor on a word you want to replace
+2. Run `:Synonymous` or press `<leader>sy`
+3. Select a synonym from the menu using arrow keys
+4. Press `Enter` to replace the word
+
+The plugin will notify you of successful replacement via `vim.notify`.

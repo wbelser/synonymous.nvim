@@ -8,8 +8,7 @@ The plugin uses `vim.ui.select` to display available synonyms and replaces the w
 
 ## Requirements
 
-- Neovim 0.9+ (uses `vim.ui.select` and health API)
-- `curl` command available in PATH
+- Neovim 0.12+ (uses `vim.net.request` for HTTP requests)
 - Internet connection (to query the Datamuse API)
 
 ## Installation
@@ -66,7 +65,7 @@ require("synonymous").setup()
 | Command | Description |
 |---------|-------------|
 | `:Synonymous` | Fetch and replace synonym for word under cursor |
-| `:SynonymousHealthCheck` | Run health checks (internet, curl, Datamuse API) |
+| `:SynonymousHealthCheck` | Run health checks (Neovim version, internet, Datamuse API) |
 
 ## Keymaps
 

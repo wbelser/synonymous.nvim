@@ -9,18 +9,21 @@ function M.select_synonym()
 		return
 	end
 
-	-- Fetch synonyms from Datamuse
-	local cmd = string.format("curl -s 'https://api.datamuse.com/words?rel_syn=%s'", word)
-	local handle = io.popen(cmd)
-	if not handle then
-		vim.notify("Failed to run curl command", vim.log.levels.ERROR)
+	-- Fetch synonyms from Datamuse using vim.net.request (Neovim 0.12+)
+	local url = "https://api.datamuse.com/words?rel_syn=" .. word
+	local res = vim.net.request(url)
+
+	if not res then
+		vim.notify("Failed to fetch synonyms for '" .. word .. "'", vim.log.levels.ERROR)
 		return
 	end
 
-	local result = handle:read("*a")
-	handle:close()
+	if res.status and res.status ~= 200 then
+		vim.notify("Datamuse API returned HTTP " .. res.status, vim.log.levels.ERROR)
+		return
+	end
 
-	local ok, data = pcall(vim.json.decode, result)
+	local ok, data = pcall(vim.json.decode, res.body)
 	if not ok or not data or #data == 0 then
 		vim.notify("No synonyms found for '" .. word .. "'", vim.log.levels.INFO)
 		return

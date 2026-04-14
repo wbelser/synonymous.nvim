@@ -13,21 +13,39 @@ local function check_nvim_version()
 end
 
 local function check_internet()
-	local res = vim.net.request("https://api.datamuse.com")
-	if not res or res.status ~= 200 then
-		health.error("No internet connection detected")
+	local ok, res = pcall(vim.net.request, "https://api.datamuse.com")
+	if not ok then
+		health.error("Network request failed: " .. tostring(res))
+		return
+	end
+	if not res then
+		health.error("No response from server (connection refused/timeout/DNS error)")
+		return
+	end
+	local status = res.status or res.code
+	if not status or status < 200 or status >= 400 then
+		health.error("Internet unavailable (HTTP status: " .. tostring(status or "nil") .. ")")
 		return
 	end
 	health.ok("Internet connection available")
 end
 
 local function check_datamuse()
-	local res = vim.net.request("https://api.datamuse.com/words?ml=test")
-	if not res or res.status ~= 200 then
-		health.error("Datamuse API not reachable")
+	local ok, res = pcall(vim.net.request, "https://api.datamuse.com/words?ml=test")
+	if not ok then
+		health.error("Datamuse API request failed: " .. tostring(res))
 		return
 	end
-	health.ok("Datamuse API reachable (HTTP " .. res.status .. ")")
+	if not res then
+		health.error("Datamuse API unreachable (connection refused/timeout/DNS error)")
+		return
+	end
+	local status = res.status or res.code
+	if not status or status < 200 or status >= 400 then
+		health.error("Datamuse API not reachable (HTTP status: " .. tostring(status or "nil") .. ")")
+		return
+	end
+	health.ok("Datamuse API reachable (HTTP " .. status .. ")")
 end
 
 function M.check()

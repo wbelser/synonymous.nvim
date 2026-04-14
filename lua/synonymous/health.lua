@@ -13,7 +13,7 @@ local function check_nvim_version()
 end
 
 local function check_internet()
-	local ok, res = pcall(vim.net.request, "https://api.datamuse.com")
+	local ok, res = pcall(vim.net.request, "https://httpbin.org/get")
 	if not ok then
 		health.error("Network request failed: " .. tostring(res))
 		return

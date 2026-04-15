@@ -1,10 +1,12 @@
-# Synonymous.nvim
+# Agents.md
 
-A Neovim plugin that provides synonym suggestions via the Datamuse API. Place your cursor on a word and invoke the plugin to get a list of synonyms to replace it with.
+## Overview
+
+**synonymous.nvim** is a Neovim plugin that provides synonym suggestions via the Datamuse API. Place your cursor on a word and invoke the plugin to get a list of synonyms to replace it with.
 
 ---
 
-## Installation
+## Loading the Plugin
 
 ### lazy.nvim
 

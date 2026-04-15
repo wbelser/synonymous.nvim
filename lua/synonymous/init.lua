@@ -5,7 +5,7 @@ local M = {}
 M.opts = nil
 
 local defaults = {
-	ft = { "markdown", "text", "tex", "html" },
+	ft = { "markdown", "text", "tex", "html", "typst" },
 	keys = {
 		{
 			lhs = "<leader>sy",

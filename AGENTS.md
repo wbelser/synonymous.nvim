@@ -13,7 +13,7 @@
 ```lua
 return {
 	"wbelser/synonymous.nvim",
-	ft = { "markdown", "text", "tex", "html" },
+	ft = { "markdown", "text", "tex", "html", "typst" },
 	config = function()
 		require("synonymous").setup()
 	end,
@@ -46,11 +46,63 @@ require("synonymous").setup()
 
 ## Setup Function
 
+The setup function accepts an options table to customize the plugin's behavior:
+
 ```lua
-require("synonymous").setup({})
+require("synonymous").setup({
+	ft = { "markdown", "text", "tex", "html", "typst" },
+	keys = {
+		{
+			lhs = "<leader>sy",
+			rhs = function()
+				require("synonymous").select_synonym()
+			end,
+			desc = "Find and replace with synonym",
+			mode = { "n", "v" },
+		},
+	},
+})
 ```
 
-The setup function currently accepts no options but is required to initialize the plugin.
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `ft` | `table<string>` | `{ "markdown", "text", "tex", "html", "typst" }` | List of filetypes to load the plugin for |
+| `keys` | `table<table>` | `{{ lhs = "<leader>sy", ... }` | List of keymaps to register |
+
+### Usage Examples
+
+**Default configuration:**
+
+```lua
+require("synonymous").setup()
+```
+
+**Custom filetypes:**
+
+```lua
+require("synonymous").setup({
+	ft = { "python", "lua" },
+})
+```
+
+**Custom keymaps:**
+
+```lua
+require("synonymous").setup({
+	keys = {
+		{
+			lhs = "<leader>ss",
+			rhs = function()
+				require("synonymous").select_synonym()
+			end,
+			desc = "Find and replace with synonym",
+			mode = { "n", "v" },
+		},
+	},
+})
+```
 
 ---
 

@@ -2,8 +2,24 @@ local core = require("synonymous.core")
 
 local M = {}
 
-function M.setup()
-	-- Later we can accept options here
+M.opts = nil
+
+local defaults = {
+	ft = { "markdown", "text", "tex", "html" },
+	keys = {
+		{
+			lhs = "<leader>sy",
+			rhs = function()
+				require("synonymous").select_synonym()
+			end,
+			desc = "Find and replace with synonym",
+			mode = { "n", "v" },
+		},
+	},
+}
+
+function M.setup(opts)
+	M.opts = vim.tbl_deep_extend("force", defaults, opts or {})
 end
 
 function M.select_synonym()

@@ -2,7 +2,7 @@
 
 ## Overview
 
-**synonymous.nvim** is a Neovim plugin that provides synonym suggestions via the Datamuse API. Place your cursor on a word and invoke the plugin to get a list of synonyms to replace it with.
+**synonymous.nvim** is a Neovim plugin that provides synonym and antonym suggestions via the Datamuse API. Place your cursor on a word and invoke the plugin to get a list of synonyms or antonyms to replace it with.
 
 ---
 
@@ -60,6 +60,14 @@ require("synonymous").setup({
 			desc = "Find and replace with synonym",
 			mode = { "n", "v" },
 		},
+		{
+			lhs = "<leader>an",
+			rhs = function()
+				require("synonymous").select_antonym()
+			end,
+			desc = "Find and replace with antonym",
+			mode = { "n", "v" },
+		},
 	},
 })
 ```
@@ -69,7 +77,7 @@ require("synonymous").setup({
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `ft` | `table<string>` | `{ "markdown", "text", "tex", "html", "typst" }` | List of filetypes to load the plugin for |
-| `keys` | `table<table>` | `{{ lhs = "<leader>sy", ... }` | List of keymaps to register |
+| `keys` | `table<table>` | `{{ lhs = "<leader>sy", ... }, { lhs = "<leader>an", ... }` | List of keymaps to register (synonym and antonym) |
 
 ### Usage Examples
 
@@ -129,8 +137,16 @@ This checks:
 
 ## Usage
 
+**Synonyms:**
 1. Place your cursor on the word you want to replace
 2. Run either:
    - Command: `:Synonymous`
    - Keymap: `<leader>sy` (in normal or visual mode)
 3. Use arrow keys or type to filter, press `Enter` to select a synonym
+
+**Antonyms:**
+1. Place your cursor on the word you want to replace
+2. Run either:
+   - Command: `:Antonymous`
+   - Keymap: `<leader>an` (in normal or visual mode)
+3. Use arrow keys or type to filter, press `Enter` to select an antonym

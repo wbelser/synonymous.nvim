@@ -2,6 +2,10 @@ vim.api.nvim_create_user_command("Synonymous", function()
 	require("synonymous").select_synonym()
 end, { desc = "show word under cursor" })
 
+vim.api.nvim_create_user_command("Antonymous", function()
+	require("synonymous").select_antonym()
+end, { desc = "find antonym for word under cursor" })
+
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
 		local syn = require("synonymous")

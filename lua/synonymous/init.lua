@@ -15,6 +15,14 @@ local defaults = {
 			desc = "Find and replace with synonym",
 			mode = { "n", "v" },
 		},
+		{
+			lhs = "<leader>an",
+			rhs = function()
+				require("synonymous").select_antonym()
+			end,
+			desc = "Find and replace with antonym",
+			mode = { "n", "v" },
+		},
 	},
 }
 
@@ -26,13 +34,8 @@ function M.select_synonym()
 	core.select_synonym()
 end
 
--- function M.select_synonym()
--- 	core.select_synonym()
--- end
---
--- function M.setup(opts)
--- 	-- optional setup for config later
--- 	M.opts = opts or {}
--- end
+function M.select_antonym()
+	core.select_antonym()
+end
 
 return M
